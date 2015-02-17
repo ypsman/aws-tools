@@ -1,11 +1,10 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 import boto.ec2
 
-AWS_REGIONS = ['region1', 'region2']
-AWS_KEY = 'KEY'
-AWS_SECRET = 'SECRET'
+AWS_REGIONS = ['REGION']
+AWS_KEY = 'xxxKEYxxx'
+AWS_SECRET = 'xxxSECRETxxx'
 EC2_INSTANCES = []
-
 
 class awsinstance():
     def __init__(self, **kwargs):
@@ -22,15 +21,16 @@ class awsinstance():
 
     def name(self):
         return str(self.__instname)
+        self.instname
 
     def namecorrection(self):
         self.__instname = self.__instname.lower()
         self.__instname = self.__instname.replace(" ", "-")
 
-    def show(self):
-        print self.__instid
-        print self.__instname
-        print self.__instip
+    #def show(self):
+    #    preint ("%s" % (self.__instid))
+    #    print ("%s" % (self.__instname))
+    #    print ("%s" % (self.__instip))
 
 def awsgetinstances(AWS_REGION):
     conn = boto.ec2.connect_to_region(AWS_REGION, aws_access_key_id=AWS_KEY,
@@ -54,24 +54,24 @@ def awsgetregions():
 
 def printer_host():
     for x in EC2_INSTANCES:
-        print x.getip()+" "+x.name()
+        print (x.getip() + " " + x.name())
 
 def printer_ssh():
     for x in EC2_INSTANCES:
-        print "Host "+x.name()
-        print "    Hostname "+x.getip()
+        print ("Host " + x.name())
+        print ("Hostname " + x.getip())
+        print ("")
 
 def main():
     awsgetregions()
-    print "___________________"
-    print "For /etc/hosts file"
-    print "___________________"
+    print ("___________________")
+    print ("For /etc/hosts file")
+    print ("___________________")
     printer_host()
-    print "___________________"
-    print "for ssh/config file"
-    print "___________________"
+    print ("___________________")
+    print ("for ssh/config file")
+    print ("___________________")
     printer_ssh()
 
-
 if __name__ == "__main__":
-    main()
+   main()
